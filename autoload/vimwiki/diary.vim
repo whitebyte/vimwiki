@@ -337,11 +337,6 @@ function! vimwiki#diary#goto_diary_index(wnum) abort
   endif
 
   call vimwiki#base#edit_file('e', s:diary_index(idx), '')
-
-  if vimwiki#vars#get_wikilocal('auto_diary_index')
-    call vimwiki#diary#generate_diary_section()
-    write! " save changes
-  endif
 endfunction
 
 
