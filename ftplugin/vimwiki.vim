@@ -558,7 +558,7 @@ if str2nr(vimwiki#vars#get_global('key_mappings').lists)
       inoremap <expr><silent><buffer> <S-CR> pumvisible() ? '<CR>' : '<Esc>:VimwikiReturn 2 2<CR>'
     endif
   endif
-  
+
   " change symbol for bulleted lists
   for s:char in vimwiki#vars#get_syntaxlocal('bullet_types')
     if !hasmapto(':VimwikiChangeSymbolTo '.s:char.'<CR>')
@@ -766,5 +766,11 @@ if vimwiki#vars#get_wikilocal('auto_generate_tags')
   " Automatically generate tags *before* the file is written
   augroup vimwiki
     au BufWritePre <buffer> call vimwiki#tags#generate_tags(0)
+  augroup END
+endif
+
+if vimwiki#vars#get_wikilocal('auto_diary_index')
+  augroup vimwiki
+    au BufEnter diary.* call vimwiki#diary#generate_diary_section() | write!
   augroup END
 endif
