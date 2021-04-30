@@ -8,7 +8,6 @@ endif
 let b:did_ftplugin = 1  " Don't load another plugin for this buffer
 
 
-
 setlocal commentstring=%%%s
 
 if vimwiki#vars#get_global('conceallevel') && exists('+conceallevel')
@@ -697,5 +696,11 @@ if vimwiki#vars#get_wikilocal('auto_generate_tags')
   " Automatically generate tags *before* the file is written
   augroup vimwiki
     au BufWritePre <buffer> call vimwiki#tags#generate_tags(0)
+  augroup END
+endif
+
+if vimwiki#vars#get_wikilocal('auto_diary_index')
+  augroup vimwiki
+    au BufEnter diary.* call vimwiki#diary#generate_diary_section() | write!
   augroup END
 endif
